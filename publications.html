@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications — Design for Failure</title>
+    <meta name="description" content="Published research and white papers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1><a href="index.html">Design for Failure</a></h1>
+        </header>
+
+        <nav>
+            <a href="index.html">About</a>
+            <a href="publications.html" class="active">Publications</a>
+        </nav>
+
+        <main>
+            <section>
+                <h2 class="section-label">Publications</h2>
+                <ul class="pub-list">
+
+                    <!-- ==========================================
+                         NEWEST PUBLICATIONS GO AT THE TOP.
+                         Copy a <li> block and modify.
+                         Link href points to: paper.html?file=FILENAME.md
+                         Drop the .md file into the /papers/ folder.
+                         ========================================== -->
+
+                    <li>
+                        <div class="pub-title"><a href="paper.html?file=falcon-secure-by-construction.md">Falcon: A Secure-by-Construction Programming Language</a></div>
+                        <div class="pub-meta">White Paper &mdash; 2025</div>
+                        <div class="pub-abstract">
+                            A language designed to eliminate entire categories of vulnerabilities at compile time through a binary trust model, typed validator functions, arena-based memory management, and fuel-bounded computation.
+                        </div>
+                        <span class="tag">language design</span>
+                        <span class="tag">security</span>
+                        <span class="tag">type systems</span>
+                    </li>
+
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <span>Design for Failure</span>
+        </footer>
+    </div>
+</body>
+</html>

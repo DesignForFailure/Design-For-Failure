@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading... — Design for Failure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" integrity="sha512-xMiEsE0CmqCgbgoBkIFEoFMhVBGyr8d/MsfrG0z9+FdxOcwOat2ckUPXSFH1BmUrhbGA/IiGJwLEON6RQ5oug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1><a href="index.html">Design for Failure</a></h1>
+        </header>
+
+        <nav>
+            <a href="index.html">About</a>
+            <a href="publications.html" class="active">Publications</a>
+        </nav>
+
+        <main>
+            <a href="publications.html" class="paper-back">&larr; All Publications</a>
+
+            <div id="paper-content" class="prose">
+                <p class="loading">Loading publication...</p>
+            </div>
+        </main>
+
+        <footer>
+            <span>Design for Failure</span>
+        </footer>
+    </div>
+
+    <script>
+        (async function () {
+            const container = document.getElementById('paper-content');
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get('file');
+
+            if (!file || !/^[\w\-]+\.md$/.test(file)) {
+                container.innerHTML = '<p class="error">No valid publication specified.</p>';
+                return;
+            }
+
+            try {
+                const res = await fetch('papers/' + file);
+                if (!res.ok) throw new Error(res.status);
+                const md = await res.text();
+
+                marked.setOptions({
+                    gfm: true,
+                    breaks: false
+                });
+
+                container.innerHTML = marked.parse(md);
+
+                // Set page title from first h1 if present
+                const h1 = container.querySelector('h1');
+                if (h1) {
+                    document.title = h1.textContent + ' — Design for Failure';
+                }
+            } catch (e) {
+                container.innerHTML = '<p class="error">Publication not found.</p>';
+            }
+        })();
+    </script>
+</body>
+</html>
